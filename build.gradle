@@ -4,11 +4,11 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
-group 'com.briarcraft'
-version '1.0.0-SNAPSHOT'
+group 'com.github.TBMCPlugins'
+version '1.7.0-SNAPSHOT'
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+sourceCompatibility = 1.16
+targetCompatibility = 1.16
 
 repositories() {
     mavenLocal()
@@ -29,8 +29,8 @@ dependencies {
     // compileOnly ('com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT') {
     //     exclude module: 'junit'
     // }
-    compileOnly ('com.destroystokyo.paper:paper:1.16.5-R0.1-SNAPSHOT') {
-//    compileOnly('io.papermc.paper:Paper-Server:1.17-R0.1-SNAPSHOT') {
+//    compileOnly ('com.destroystokyo.paper:paper:1.16.5-R0.1-SNAPSHOT') {
+    compileOnly('io.papermc.paper:Paper-Server:1.17-R0.1-SNAPSHOT') {
         exclude module: 'brigadier'
         exclude module: 'cleaner'
         exclude module: 'minecraft-server'
