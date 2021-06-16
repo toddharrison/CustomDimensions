@@ -6,8 +6,8 @@ import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Callables;
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.server.v1_16_R3.*;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
+//import org.bstats.bukkit.Metrics;
+//import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldType;
 import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class CustomDimensions extends JavaPlugin implements Listener {
-	private Metrics metrics;
+//	private Metrics metrics;
 
 	@Override
 	public void onEnable() {
-		metrics = new Metrics(this, 10545);
+//		metrics = new Metrics(this, 10545);
 		getLogger().info("Loading custom dimensions...");
 		try {
 			load();
@@ -68,9 +68,9 @@ public class CustomDimensions extends JavaPlugin implements Listener {
 				e.printStackTrace();
 			}
 		}
-		metrics.addCustomChart(new SimplePie("all_custom_dimensions", Callables.returning(allCount + "")));
-		metrics.addCustomChart(new SimplePie("loaded_custom_dimensions", Callables.returning(loadedCount + "")));
-		metrics.addCustomChart(new SimplePie("ignored_custom_dimensions", Callables.returning(ignoredCount + "")));
+//		metrics.addCustomChart(new SimplePie("all_custom_dimensions", Callables.returning(allCount + "")));
+//		metrics.addCustomChart(new SimplePie("loaded_custom_dimensions", Callables.returning(loadedCount + "")));
+//		metrics.addCustomChart(new SimplePie("ignored_custom_dimensions", Callables.returning(ignoredCount + "")));
 	}
 
 	private boolean loadDimension(ResourceKey<WorldDimension> dimKey, WorldDimension dimension,

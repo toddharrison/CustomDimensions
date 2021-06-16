@@ -4,3 +4,6 @@ Custom dimension support for 1.16.4 Bukkit/Spigot/Paper servers
 
 ## Usage
 See on [SpigotMC](https://www.spigotmc.org/resources/1-16-custom-dimensions.83731/)
+
+## Install Paper Jar
+java -Dpaperclip.install=true -jar paper-*.jar

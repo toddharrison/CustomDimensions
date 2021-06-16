@@ -1,0 +1,65 @@
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'com.briarcraft'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+repositories() {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
+//    maven { url 'https://maven.playpro.com/' } // CoreProtect
+//    maven { url 'https://maven.addstar.com.au/artifactory/all-snapshot' } // Prism
+    maven { url 'https://maven.enginehub.org/repo/' } // WorldGuard
+    maven { url 'https://jitpack.io/' } // Querz - NBT
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // compileOnly ('com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT') {
+    //     exclude module: 'junit'
+    // }
+    compileOnly ('com.destroystokyo.paper:paper:1.16.5-R0.1-SNAPSHOT') {
+//    compileOnly('io.papermc.paper:Paper-Server:1.17-R0.1-SNAPSHOT') {
+        exclude module: 'brigadier'
+        exclude module: 'cleaner'
+        exclude module: 'minecraft-server'
+    }
+    // testImplementation ('com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT') {
+    //     exclude module: 'junit'
+    // }
+    // testImplementation('com.destroystokyo.paper:paper:1.16.5-R0.1-SNAPSHOT') {
+    //     exclude module: 'brigadier'
+    //     exclude module: 'cleaner'
+    //     exclude module: 'minecraft-server'
+    // }
+}
+
+processResources {
+    filesMatching("**/*.yml") {
+        expand( project.properties )
+    }
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    minimize()
+    // minimize {
+    //     exclude(dependency("org.jetbrains.kotlin:.*"))
+    // }
+//    relocate 'net.querz', 'com.briarcraft.shadow.querz'
+}
+
+test {
+    useJUnitPlatform()
+}
