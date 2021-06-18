@@ -121,11 +121,12 @@ public class CustomDimensions extends JavaPlugin implements Listener {
 //		metrics.addCustomChart(new SimplePie("ignored_custom_dimensions", Callables.returning(ignoredCount + "")));
     }
 
-    private boolean loadDimension(ResourceKey<WorldDimension> dimKey,
-                                  WorldDimension dimension,
-                                  Convertable convertable,
-                                  DedicatedServer console,
-                                  org.bukkit.World mainWorld
+    private boolean loadDimension(
+            ResourceKey<WorldDimension> dimKey,
+            WorldDimension dimension,
+            Convertable convertable,
+            DedicatedServer console,
+            org.bukkit.World mainWorld
     ) throws IOException {
 //		if (dimKey == WorldDimension.OVERWORLD //The default dimensions are already loaded
 //				|| dimKey == WorldDimension.THE_NETHER
@@ -212,11 +213,11 @@ public class CustomDimensions extends JavaPlugin implements Listener {
         ResourceKey<IRegistry<DimensionManager>> k = IRegistry.P;
         MinecraftKey v = dimKey.a();
         ResourceKey<DimensionManager> dimManResKey = ResourceKey.a(k, v);
-//		IRegistryCustom.Dimension cr2 = console.customRegistry;
-        IRegistryCustom.Dimension cr2 = console.l;
-//		IRegistry<DimensionManager> foo = cr2.a();
-        IRegistry<DimensionManager> foo = cr2.b(IRegistry.P);
-        RegistryMaterials<DimensionManager> dimRegistry = ((RegistryMaterials<DimensionManager>) foo);
+//		IRegistryCustom.Dimension rcd = console.customRegistry;
+        IRegistryCustom.Dimension rcd = console.l;
+//		IRegistry<DimensionManager> rdm = rcd.a();
+        IRegistry<DimensionManager> rdm = rcd.b(IRegistry.P);
+        RegistryMaterials<DimensionManager> dimRegistry = ((RegistryMaterials<DimensionManager>) rdm);
         {
             MinecraftKey key = dimRegistry.getKey(dimensionmanager);
             if (key == null) { //The loaded manager is different - different dimension type
@@ -231,13 +232,13 @@ public class CustomDimensions extends JavaPlugin implements Listener {
 
 //		Executor e = console.executorService;
         Executor e = console.aA;
-        WorldServer worldserver = new WorldServer(console, e, session,
-                worlddata, worldKey, dimensionmanager, worldloadlistener, chunkgenerator,
-                false, //isDebugWorld
-                BiomeManager.a(worlddata.getGeneratorSettings().getSeed()), //Biome seed
-                spawners,
-                true, //Update world time
-                org.bukkit.World.Environment.NORMAL, null);
+        boolean isDebugWorld = false;
+        boolean updateWorldTime = true;
+        long biomeSeed = worlddata.getGeneratorSettings().getSeed();
+        WorldServer worldserver = new WorldServer(
+                console, e, session, worlddata, worldKey, dimensionmanager, worldloadlistener, chunkgenerator,
+                isDebugWorld, BiomeManager.a(biomeSeed), spawners, updateWorldTime, org.bukkit.World.Environment.NORMAL,
+                null);
 
         if (Bukkit.getWorld(name.toLowerCase(Locale.ENGLISH)) == null) {
             getLogger().warning("Failed to load custom dimension " + name);
